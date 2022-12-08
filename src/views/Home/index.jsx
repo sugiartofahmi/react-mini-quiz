@@ -17,7 +17,12 @@ const Home = () => {
       ? setCurrentQuestion(nextQuestion)
       : setShowScore(true);
   };
-  console.log(score);
+
+  const resetButton = () => {
+    setShowScore(false);
+    setCurrentQuestion(0);
+    setScore(0);
+  };
   return (
     <>
       <MainLayout>
@@ -25,16 +30,17 @@ const Home = () => {
         <div className="flex justify-center items-center w-full h-full text-[#F2E7D5]">
           <Card>
             {showScore ? (
-              <div className="flex w-full h-full justify-center items-center">
+              <div className="flex flex-col gap-y-5 w-full h-full justify-center items-center">
                 <h1 className="text-2xl text-center leading-tight font-medium mb-2">
                   Your Score Is {score} Out Of {questions.length}
                 </h1>
+                <Button onClick={resetButton} text="reset" />
               </div>
             ) : (
               <>
                 <div className="w-3/5">
                   <h5 className="text-2xl leading-tight font-medium mb-2">
-                    Question
+                    Question <span> </span>
                     <span className=" text-base">
                       {currentQuestion + 1}/{questions.length}
                     </span>
