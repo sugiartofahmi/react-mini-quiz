@@ -9,14 +9,17 @@ const Home = () => {
   const [showScore, setShowScore] = useState(false);
   const [score, setScore] = useState(0);
   const [questions, setQuestions] = useState(Questions);
-
+  const [time, setTime] = useState(5000);
   const submitAnswer = (isCorrect) => {
     isCorrect && setScore(score + 1);
     const nextQuestion = currentQuestion + 1;
     nextQuestion < questions.length
       ? setCurrentQuestion(nextQuestion)
       : setShowScore(true);
+    clearTimeout(timeout);
   };
+  const timeout = setTimeout(submitAnswer, time);
+  console.log(timeout);
 
   const resetButton = () => {
     setShowScore(false);
